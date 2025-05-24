@@ -11,7 +11,7 @@ export function VideoSelect({ onVideoChange }: VideoSelectProps) {
         <button
           key={index}
           onClick={() => onVideoChange(index)}
-          className="bg-blue-500 text-white rounded px-4 py-2 cursor-pointer hover:opacity-90"
+          className="bg-blue-500 text-white rounded px-4 py-2 cursor-pointer hover:opacity-90 flex-1"
         >
           {video.videoUrl}
         </button>

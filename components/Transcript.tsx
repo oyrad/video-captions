@@ -6,12 +6,14 @@ import type { Caption } from '../util/parse-captions-file';
 
 interface TranscriptProps extends HTMLProps<HTMLDivElement> {
   captions: Array<Caption>;
+  error: string | null;
   activeCaption?: Caption;
   onCaptionClick: (startTime: number) => void;
 }
 
 export function Transcript({
   captions,
+  error,
   activeCaption,
   onCaptionClick,
   className,
@@ -30,6 +32,14 @@ export function Transcript({
       });
     }
   }, [activeCaption]);
+
+  if (error) {
+    return (
+      <div className="bg-red-100 border border-red-500 text-red-500 h-fit rounded-xl py-2 px-4">
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div

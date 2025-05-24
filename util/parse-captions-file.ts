@@ -28,8 +28,8 @@ function parseTime(time: string) {
   const parsedMilliseconds = milliseconds ? parseInt(milliseconds, 10) : 0;
 
   return (
-    parseInt(hours) * 3600 +
-    parseInt(minutes) * 60 +
+    parseInt(hours, 10) * 3600 +
+    parseInt(minutes, 10) * 60 +
     parsedSeconds +
     parsedMilliseconds / 1000
   );

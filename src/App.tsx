@@ -7,20 +7,16 @@ import { videoData } from '../data/video-data.ts';
 import { VideoSelect } from '../components/VideoSelect.tsx';
 
 export default function App() {
-  const [video, setVideo] = useState(videoData[1]);
+  const [video, setVideo] = useState(videoData[0]);
   const [playbackTime, setPlaybackTime] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { captions } = useCaptions(video.captionsUrl);
+  const { captions, error: captionsLoadError } = useCaptions(video.captionsUrl);
 
   const activeCaption = captions.find(
     (caption) => caption.start < playbackTime && caption.end > playbackTime,
   );
-
-  function handleVideoChange(index: number) {
-    setVideo(videoData[index]);
-  }
 
   useEffect(() => {
     let rafId: number;
@@ -45,12 +41,13 @@ export default function App() {
         <div className="flex flex-col-reverse md:flex-row gap-4">
           <CaptionSettings className="flex-1" />
 
-          <VideoSelect onVideoChange={handleVideoChange} />
+          <VideoSelect onVideoChange={(index) => setVideo(videoData[index])} />
         </div>
       </div>
 
       <Transcript
         captions={captions}
+        error={captionsLoadError}
         activeCaption={activeCaption}
         onCaptionClick={(startTime) => {
           if (videoRef.current) {
