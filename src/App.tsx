@@ -34,8 +34,8 @@ export default function App() {
   }, []);
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[auto_auto] gap-4 p-4 w-screen h-screen bg-neutral-900">
-      <div className="flex flex-col gap-4 lg:col-span-2 lg:row-start-1">
+    <main className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 w-screen h-screen bg-neutral-900">
+      <div className="flex flex-col gap-4 lg:col-span-2">
         <VideoPlayer src={video.videoUrl} videoRef={videoRef} activeCaption={activeCaption} />
 
         <div className="flex flex-col-reverse md:flex-row gap-4">
@@ -55,7 +55,7 @@ export default function App() {
             void videoRef.current.play();
           }
         }}
-        className="lg:col-start-3 lg:row-span-2 max-h-fit"
+        className="lg:col-start-3 max-h-fit"
       />
     </main>
   );

@@ -6,7 +6,7 @@ interface VideoSelectProps {
 
 export function VideoSelect({ onVideoChange }: VideoSelectProps) {
   return (
-    <div className="bg-white rounded-xl p-4 flex flex-col gap-2">
+    <div className="bg-white rounded-xl p-3 flex flex-row lg:flex-col gap-2">
       {videoData.map((video, index) => (
         <button
           key={index}

@@ -24,10 +24,11 @@ export function Transcript({
   useEffect(() => {
     if (activeCaptionRef.current && activeCaptionRef.current.parentElement) {
       const container = activeCaptionRef.current.parentElement;
+      const containerOffsetTop = container.offsetTop;
       const elementTop = activeCaptionRef.current.offsetTop;
 
       container.scrollTo({
-        top: elementTop - 25,
+        top: elementTop - containerOffsetTop - 9,
         behavior: 'smooth',
       });
     }
@@ -43,7 +44,10 @@ export function Transcript({
 
   return (
     <div
-      className={cn('flex flex-col gap-1 py-2 px-3 overflow-y-auto rounded-xl bg-white', className)}
+      className={cn(
+        'flex flex-col gap-1 py-2 px-3 overflow-y-auto rounded-xl bg-white no-scrollbar',
+        className,
+      )}
       {...rest}
     >
       {captions.map(({ id, start, text }) => {
