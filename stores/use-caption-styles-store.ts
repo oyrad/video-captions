@@ -4,7 +4,7 @@ import { CAPTION_POSITION, type CaptionPosition } from '../const/caption-positio
 
 const captionStylesDefaults = {
   captionsEnabled: true,
-  fontSize: '1.25rem',
+  fontSize: '1.5rem',
   textColor: '#ffffff',
   backgroundColor: '#000000',
   backgroundOpacity: '0.9',
