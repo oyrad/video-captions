@@ -1,9 +1,15 @@
 import { create } from 'zustand/react';
 import { persist } from 'zustand/middleware';
-import {
-  CAPTION_POSITION,
-  type CaptionPosition,
-} from '../const/caption-position.ts';
+import { CAPTION_POSITION, type CaptionPosition } from '../const/caption-position.ts';
+
+const captionStylesDefaults = {
+  captionsEnabled: true,
+  fontSize: '1.25rem',
+  textColor: '#ffffff',
+  backgroundColor: '#000000',
+  backgroundOpacity: '0.9',
+  position: CAPTION_POSITION.BOTTOM,
+};
 
 interface CaptionStylesStore {
   captionsEnabled: boolean;
@@ -18,23 +24,20 @@ interface CaptionStylesStore {
   setBackgroundColor: (color: string) => void;
   setBackgroundOpacity: (opacity: string) => void;
   setPosition: (position: CaptionPosition) => void;
+  resetStyles: VoidFunction;
 }
 
 export const useCaptionStylesStore = create<CaptionStylesStore>()(
   persist(
     (set) => ({
-      captionsEnabled: true,
-      fontSize: '1rem',
-      textColor: '#ffffff',
-      backgroundColor: '#000000',
-      backgroundOpacity: '1',
-      position: CAPTION_POSITION.BOTTOM,
+      ...captionStylesDefaults,
       setCaptionsEnabled: (captionsEnabled) => set({ captionsEnabled }),
       setFontSize: (fontSize) => set({ fontSize }),
       setTextColor: (textColor) => set({ textColor }),
       setBackgroundColor: (backgroundColor) => set({ backgroundColor }),
       setBackgroundOpacity: (backgroundOpacity) => set({ backgroundOpacity }),
       setPosition: (position) => set({ position }),
+      resetStyles: () => set({ ...captionStylesDefaults }),
     }),
     {
       name: 'caption-styles',
