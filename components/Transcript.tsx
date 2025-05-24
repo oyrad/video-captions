@@ -2,7 +2,7 @@ import type { HTMLProps } from 'react';
 import { useEffect, useRef } from 'react';
 import { cn } from '../util/cn';
 import { formatSecondsForDisplay } from '../util/format-seconds-for-display';
-import type { Caption } from '../util/parse-captions-file';
+import type { Caption } from '../types/caption.ts';
 
 interface TranscriptProps extends HTMLProps<HTMLDivElement> {
   captions: Array<Caption>;
@@ -19,7 +19,7 @@ export function Transcript({
   className,
   ...rest
 }: TranscriptProps) {
-  const activeCaptionRef = useRef<HTMLDivElement | null>(null);
+  const activeCaptionRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (activeCaptionRef.current && activeCaptionRef.current.parentElement) {
@@ -43,7 +43,7 @@ export function Transcript({
   }
 
   return (
-    <div
+    <aside
       className={cn(
         'flex flex-col gap-1 py-2 px-3 overflow-y-auto rounded-xl bg-white no-scrollbar',
         className,
@@ -52,8 +52,9 @@ export function Transcript({
     >
       {captions.map(({ id, start, text }) => {
         return (
-          <div
+          <button
             key={id}
+            type="button"
             ref={id === activeCaption?.id ? activeCaptionRef : null}
             className={cn(
               'flex p-2 rounded-lg cursor-pointer text-black hover:bg-blue-50',
@@ -63,9 +64,9 @@ export function Transcript({
           >
             <p className="min-w-14">{formatSecondsForDisplay(start)}</p>
             <p>{text}</p>
-          </div>
+          </button>
         );
       })}
-    </div>
+    </aside>
   );
 }

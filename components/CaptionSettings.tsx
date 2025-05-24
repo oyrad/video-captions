@@ -1,7 +1,7 @@
 import { useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
 import type { HTMLProps } from 'react';
 import { cn } from '../util/cn.ts';
-import { CAPTION_POSITION, isCaptionPosition } from '../const/caption-position.ts';
+import { CAPTION_POSITION, isCaptionPosition } from '../constants/caption-position.ts';
 
 export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement>) {
   const store = useCaptionStylesStore();

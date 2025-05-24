@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { VideoPlayer } from '../components/VideoPlayer.tsx';
 import { useCaptions } from '../hooks/use-captions.ts';
 import { Transcript } from '../components/Transcript.tsx';
@@ -14,8 +14,9 @@ export default function App() {
 
   const { captions, error: captionsLoadError } = useCaptions(video.captionsUrl);
 
-  const activeCaption = captions.find(
-    (caption) => caption.start < playbackTime && caption.end > playbackTime,
+  const activeCaption = useMemo(
+    () => captions.find((caption) => caption.start < playbackTime && caption.end > playbackTime),
+    [captions, playbackTime],
   );
 
   useEffect(() => {
@@ -41,7 +42,10 @@ export default function App() {
         <div className="flex flex-col-reverse md:flex-row gap-4">
           <CaptionSettings className="flex-1" />
 
-          <VideoSelect onVideoChange={(index) => setVideo(videoData[index])} />
+          <VideoSelect
+            selectedIndex={videoData.indexOf(video)}
+            onVideoChange={(index) => setVideo(videoData[index])}
+          />
         </div>
       </div>
 

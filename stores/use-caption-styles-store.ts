@@ -1,6 +1,6 @@
 import { create } from 'zustand/react';
 import { persist } from 'zustand/middleware';
-import { CAPTION_POSITION, type CaptionPosition } from '../const/caption-position.ts';
+import { CAPTION_POSITION, type CaptionPosition } from '../constants/caption-position.ts';
 
 const captionStylesDefaults = {
   captionsEnabled: true,

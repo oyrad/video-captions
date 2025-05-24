@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { type Caption, parseCaptionsFile } from '../util/parse-captions-file.ts';
+import { parseSrtFile } from '../util/parse-srt-file.ts';
+import type { Caption } from '../types/caption.ts';
 
 export function useCaptions(url: string) {
   const [captions, setCaptions] = useState<Array<Caption>>([]);
@@ -14,9 +15,11 @@ export function useCaptions(url: string) {
     fetch(url)
       .then((res) => res.text())
       .then((text) => {
-        setCaptions(parseCaptionsFile(text));
+        setCaptions(parseSrtFile(text));
       })
-      .catch((err) => setError(`Error loading captions: ${err}`))
+      .catch(() =>
+        setError('Failed to load captions. Please check the URL or your network connection.'),
+      )
       .finally(() => setLoading(false));
   }, [url]);
 

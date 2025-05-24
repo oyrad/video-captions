@@ -1,9 +1,9 @@
-import type { HTMLProps, RefObject } from 'react';
-import type { Caption } from '../util/parse-captions-file.ts';
+import { type HTMLProps, type RefObject, useState } from 'react';
 import { cn } from '../util/cn.ts';
 import { useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
 import { hexToRgba } from '../util/hex-to-rgba.ts';
-import { CAPTION_POSITION } from '../const/caption-position.ts';
+import { CAPTION_POSITION } from '../constants/caption-position.ts';
+import type { Caption } from '../types/caption.ts';
 
 interface VideoPlayerProps extends HTMLProps<HTMLDivElement> {
   src: string;
@@ -18,12 +18,30 @@ export function VideoPlayer({
   className,
   ...rest
 }: VideoPlayerProps) {
+  const [error, setError] = useState<string | null>(null);
+
   const { captionsEnabled, fontSize, textColor, backgroundColor, backgroundOpacity, position } =
     useCaptionStylesStore();
 
+  if (error) {
+    return (
+      <div className="bg-red-100 border border-red-500 text-red-500 h-fit rounded-xl py-2 px-4">
+        {error}
+      </div>
+    );
+  }
+
   return (
     <div className={cn('relative w-fit h-fit', className)} {...rest}>
-      <video src={src} ref={videoRef} controls className="rounded-xl" />
+      <video
+        src={src}
+        ref={videoRef}
+        controls
+        className="rounded-xl"
+        onError={() =>
+          setError('Failed to load video. Please check the URL or your network connection.')
+        }
+      />
 
       {captionsEnabled && activeCaption && (
         <p
