@@ -4,6 +4,7 @@ import { useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
 import { hexToRgba } from '../util/hex-to-rgba.ts';
 import { CAPTION_POSITION } from '../constants/caption-position.ts';
 import type { Caption } from '../types/caption.ts';
+import { FONT_FAMILY } from '../constants/font-family.ts';
 
 interface VideoPlayerProps extends HTMLProps<HTMLDivElement> {
   src: string;
@@ -20,8 +21,15 @@ export function VideoPlayer({
 }: VideoPlayerProps) {
   const [error, setError] = useState<string | null>(null);
 
-  const { captionsEnabled, fontSize, textColor, backgroundColor, backgroundOpacity, position } =
-    useCaptionStylesStore();
+  const {
+    captionsEnabled,
+    fontSize,
+    fontFamily,
+    textColor,
+    backgroundColor,
+    backgroundOpacity,
+    position,
+  } = useCaptionStylesStore();
 
   if (error) {
     return (
@@ -45,7 +53,9 @@ export function VideoPlayer({
         <p
           className={cn(
             'absolute px-3 py-1 rounded left-1/2 transform -translate-x-1/2 text-center z-10',
-            position === CAPTION_POSITION.BOTTOM ? 'bottom-10 lg:bottom-24' : 'top-10 lg:top-24',
+            fontFamily === FONT_FAMILY.SERIF && 'font-serif',
+            fontFamily === FONT_FAMILY.MONOSPACE && 'font-mono',
+            position === CAPTION_POSITION.TOP ? 'top-[15%]' : 'bottom-[15%]',
           )}
           style={{
             fontSize,

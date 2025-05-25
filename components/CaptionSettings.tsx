@@ -1,8 +1,9 @@
-import { useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
+import { captionStyleDefaults, useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
 import type { HTMLProps } from 'react';
 import { cn } from '../util/cn.ts';
 import { CAPTION_POSITION, isCaptionPosition } from '../constants/caption-position.ts';
 import { useHotkey } from '../hooks/use-hotkey.ts';
+import { FONT_FAMILY, isFontFamily } from '../constants/font-family.ts';
 
 export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement>) {
   const store = useCaptionStylesStore();
@@ -16,7 +17,7 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
       className={cn('bg-white rounded-xl p-4 grid grid-cols-2 lg:grid-cols-4 gap-4', className)}
       {...rest}
     >
-      <div className="flex items-center col-span-2 gap-2">
+      <div className="flex items-center col-span-3 gap-2">
         <label htmlFor="captions-toggle" className="text-lg font-semibold text-gray-800">
           Captions (c)
         </label>
@@ -49,13 +50,30 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
         />
       </div>
 
-      <div className="flex flex-col gap-1 col-span-2">
+      <div className="flex flex-col gap-1">
+        <label className="text-sm font-medium">Font Family</label>
+        <select
+          value={store.fontFamily}
+          onChange={(e) =>
+            store.setFontFamily(
+              isFontFamily(e.target.value) ? e.target.value : captionStyleDefaults.fontFamily,
+            )
+          }
+          className="w-full border rounded px-2 py-1"
+        >
+          <option value={FONT_FAMILY.SANS_SERIF}>Sans serif</option>
+          <option value={FONT_FAMILY.SERIF}>Serif</option>
+          <option value={FONT_FAMILY.MONOSPACE}>Monospace</option>
+        </select>
+      </div>
+
+      <div className="flex flex-col gap-1">
         <label className="text-sm font-medium">Position</label>
         <select
           value={store.position}
           onChange={(e) =>
             store.setPosition(
-              isCaptionPosition(e.target.value) ? e.target.value : CAPTION_POSITION.BOTTOM,
+              isCaptionPosition(e.target.value) ? e.target.value : captionStyleDefaults.position,
             )
           }
           className="w-full border rounded px-2 py-1"
