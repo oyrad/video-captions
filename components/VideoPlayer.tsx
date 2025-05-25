@@ -32,20 +32,20 @@ export function VideoPlayer({
   }
 
   return (
-    <section className={cn('relative w-fit h-fit', className)} {...rest}>
+    <section className={cn('relative w-full aspect-video rounded-xl', className)} {...rest}>
       <video
         src={src}
         ref={videoRef}
         controls
-        className="rounded-xl"
+        className="absolute inset-0 w-full h-full bg-black object-contain"
         onError={() => setError('Failed to load video. Please check the URL of the video file.')}
       />
 
       {captionsEnabled && activeCaption && (
         <p
           className={cn(
-            'absolute px-3 py-1 rounded left-1/2 transform -translate-x-1/2 text-center',
-            position === CAPTION_POSITION.BOTTOM ? 'bottom-2 lg:bottom-6' : 'top-2 lg:top-6',
+            'absolute px-3 py-1 rounded left-1/2 transform -translate-x-1/2 text-center z-10',
+            position === CAPTION_POSITION.BOTTOM ? 'bottom-10 lg:bottom-24' : 'top-10 lg:top-24',
           )}
           style={{
             fontSize,
