@@ -1,7 +1,7 @@
 export const FONT_FAMILY = {
-  SANS_SERIF: 'font-sans',
-  SERIF: 'font-serif',
-  MONOSPACE: 'font-mono',
+  SANS_SERIF: 'sans-serif',
+  SERIF: 'serif',
+  MONOSPACE: 'monospace',
 } as const;
 
 export type FontFamily = (typeof FONT_FAMILY)[keyof typeof FONT_FAMILY];
