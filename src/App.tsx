@@ -15,7 +15,7 @@ export default function App() {
   const { captions, error: captionsLoadError } = useCaptions(video.captionsUrl);
 
   const activeCaption = useMemo(
-    () => captions.find((caption) => caption.start < playbackTime && caption.end > playbackTime),
+    () => captions.find((caption) => caption.start <= playbackTime && caption.end > playbackTime),
     [captions, playbackTime],
   );
 

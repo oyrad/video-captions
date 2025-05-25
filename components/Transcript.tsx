@@ -7,15 +7,15 @@ import type { Caption } from '../types/caption.ts';
 interface TranscriptProps extends HTMLProps<HTMLDivElement> {
   captions: Array<Caption>;
   error: string | null;
-  activeCaption?: Caption;
   onCaptionClick: (startTime: number) => void;
+  activeCaption?: Caption;
 }
 
 export function Transcript({
   captions,
   error,
-  activeCaption,
   onCaptionClick,
+  activeCaption,
   className,
   ...rest
 }: TranscriptProps) {
@@ -24,11 +24,10 @@ export function Transcript({
   useEffect(() => {
     if (activeCaptionRef.current && activeCaptionRef.current.parentElement) {
       const container = activeCaptionRef.current.parentElement;
-      const containerOffsetTop = container.offsetTop;
       const elementTop = activeCaptionRef.current.offsetTop;
 
       container.scrollTo({
-        top: elementTop - containerOffsetTop - 9,
+        top: elementTop - container.offsetTop - 9,
         behavior: 'smooth',
       });
     }
@@ -44,10 +43,7 @@ export function Transcript({
 
   return (
     <aside
-      className={cn(
-        'flex flex-col gap-1 py-2 px-3 overflow-y-auto rounded-xl bg-white no-scrollbar',
-        className,
-      )}
+      className={cn('flex flex-col gap-1 py-2 px-3 overflow-y-auto rounded-xl bg-white', className)}
       {...rest}
     >
       {captions.map(({ id, start, text }) => {
@@ -57,13 +53,13 @@ export function Transcript({
             type="button"
             ref={id === activeCaption?.id ? activeCaptionRef : null}
             className={cn(
-              'flex p-2 rounded-lg cursor-pointer text-black hover:bg-blue-50',
+              'flex px-1 py-2 rounded-lg cursor-pointer text-black hover:bg-blue-50',
               id === activeCaption?.id && 'bg-blue-200',
             )}
             onClick={() => onCaptionClick(start)}
           >
-            <p className="min-w-14">{formatSecondsForDisplay(start)}</p>
-            <p>{text}</p>
+            <p className="min-w-16">{formatSecondsForDisplay(start)}</p>
+            <p className="text-left">{text}</p>
           </button>
         );
       })}

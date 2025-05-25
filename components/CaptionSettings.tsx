@@ -7,7 +7,7 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
   const store = useCaptionStylesStore();
 
   return (
-    <div
+    <section
       className={cn('bg-white rounded-xl p-4 grid grid-cols-2 lg:grid-cols-4 gap-4', className)}
       {...rest}
     >
@@ -90,6 +90,6 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
           onChange={(e) => store.setBackgroundColor(e.target.value)}
         />
       </div>
-    </div>
+    </section>
   );
 }

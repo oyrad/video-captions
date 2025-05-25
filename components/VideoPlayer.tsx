@@ -32,7 +32,7 @@ export function VideoPlayer({
   }
 
   return (
-    <div className={cn('relative w-fit h-fit', className)} {...rest}>
+    <section className={cn('relative w-fit h-fit', className)} {...rest}>
       <video
         src={src}
         ref={videoRef}
@@ -58,6 +58,6 @@ export function VideoPlayer({
           {activeCaption.text}
         </p>
       )}
-    </div>
+    </section>
   );
 }
