@@ -2,7 +2,7 @@ import { create } from 'zustand/react';
 import { persist } from 'zustand/middleware';
 import { CAPTION_POSITION, type CaptionPosition } from '../constants/caption-position.ts';
 
-const captionStylesDefaults = {
+const captionStyleDefaults = {
   captionsEnabled: true,
   fontSize: '1.5rem',
   textColor: '#ffffff',
@@ -30,14 +30,14 @@ interface CaptionStylesStore {
 export const useCaptionStylesStore = create<CaptionStylesStore>()(
   persist(
     (set) => ({
-      ...captionStylesDefaults,
+      ...captionStyleDefaults,
       setCaptionsEnabled: (captionsEnabled) => set({ captionsEnabled }),
       setFontSize: (fontSize) => set({ fontSize }),
       setTextColor: (textColor) => set({ textColor }),
       setBackgroundColor: (backgroundColor) => set({ backgroundColor }),
       setBackgroundOpacity: (backgroundOpacity) => set({ backgroundOpacity }),
       setPosition: (position) => set({ position }),
-      resetStyles: () => set({ ...captionStylesDefaults }),
+      resetStyles: () => set({ ...captionStyleDefaults }),
     }),
     {
       name: 'caption-styles',
