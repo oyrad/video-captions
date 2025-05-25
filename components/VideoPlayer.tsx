@@ -37,7 +37,7 @@ export function VideoPlayer({
         src={src}
         ref={videoRef}
         controls
-        className="absolute inset-0 w-full h-full bg-black object-contain"
+        className="absolute inset-0 w-full h-full bg-black object-contain outline-none"
         onError={() => setError('Failed to load video. Please check the URL of the video file.')}
       />
 
