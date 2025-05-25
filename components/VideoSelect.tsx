@@ -1,14 +1,23 @@
 import { videoData } from '../data/video-data';
 import { cn } from '../util/cn.ts';
+import type { HTMLProps } from 'react';
 
-interface VideoSelectProps {
+interface VideoSelectProps extends HTMLProps<HTMLDivElement> {
   selectedIndex: number;
   onVideoChange: (index: number) => void;
 }
 
-export function VideoSelect({ selectedIndex, onVideoChange }: VideoSelectProps) {
+export function VideoSelect({
+  selectedIndex,
+  onVideoChange,
+  className,
+  ...rest
+}: VideoSelectProps) {
   return (
-    <section className="bg-white rounded-xl p-3 flex flex-row lg:flex-col gap-2">
+    <section
+      className={cn('bg-white rounded-xl p-3 flex flex-row lg:flex-col gap-2', className)}
+      {...rest}
+    >
       {videoData.map((video, index) => (
         <button
           key={index}
