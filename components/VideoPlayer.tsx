@@ -45,7 +45,7 @@ export function VideoPlayer({
         <p
           className={cn(
             'absolute px-3 py-1 rounded left-1/2 transform -translate-x-1/2 text-center',
-            position === CAPTION_POSITION.BOTTOM ? 'bottom-2 md:bottom-6' : 'top-2 md:top-6',
+            position === CAPTION_POSITION.BOTTOM ? 'bottom-2 lg:bottom-6' : 'top-2 lg:top-6',
           )}
           style={{
             fontSize,

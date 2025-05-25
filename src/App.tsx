@@ -39,7 +39,7 @@ export default function App() {
       <div className="flex flex-col gap-4 lg:col-span-2">
         <VideoPlayer src={video.videoUrl} videoRef={videoRef} activeCaption={activeCaption} />
 
-        <div className="flex flex-col-reverse md:flex-row gap-4">
+        <div className="flex flex-col-reverse lg:flex-row gap-4">
           <CaptionSettings className="flex-1" />
 
           <VideoSelect
