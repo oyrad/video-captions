@@ -2,9 +2,14 @@ import { useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
 import type { HTMLProps } from 'react';
 import { cn } from '../util/cn.ts';
 import { CAPTION_POSITION, isCaptionPosition } from '../constants/caption-position.ts';
+import { useHotkey } from '../hooks/use-hotkey.ts';
 
 export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement>) {
   const store = useCaptionStylesStore();
+
+  useHotkey('c', () => {
+    store.setCaptionsEnabled(!store.captionsEnabled);
+  });
 
   return (
     <section
@@ -13,7 +18,7 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
     >
       <div className="flex items-center col-span-2 gap-2">
         <label htmlFor="captions-toggle" className="text-lg font-semibold text-gray-800">
-          Captions
+          Captions (c)
         </label>
         <input
           id="captions-toggle"
@@ -37,7 +42,7 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
           type="range"
           min="0.5"
           max="3"
-          step="0.01"
+          step="0.05"
           value={parseFloat(store.fontSize)}
           onChange={(e) => store.setFontSize(`${e.target.value}rem`)}
           className="w-full"
@@ -66,7 +71,7 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
           type="range"
           min="0"
           max="1"
-          step="0.01"
+          step="0.05"
           value={store.backgroundOpacity}
           onChange={(e) => store.setBackgroundOpacity(e.target.value)}
           className="w-full"

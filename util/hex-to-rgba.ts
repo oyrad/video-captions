@@ -1,4 +1,4 @@
-export function hexToRgba(hex: string, opacity: string): string {
+export function hexToRgba(hex: string, opacity: string) {
   const bigint = parseInt(hex.replace('#', ''), 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;

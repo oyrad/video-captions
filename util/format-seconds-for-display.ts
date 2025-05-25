@@ -1,4 +1,4 @@
-export function formatSecondsForDisplay(seconds: number): string {
+export function formatSecondsForDisplay(seconds: number) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
   const formattedMinutes = String(minutes).padStart(2, '0');

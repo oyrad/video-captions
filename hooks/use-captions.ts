@@ -17,9 +17,7 @@ export function useCaptions(url: string) {
       .then((text) => {
         setCaptions(parseSrtFile(text));
       })
-      .catch(() =>
-        setError('Failed to load captions. Please check the URL or your network connection.'),
-      )
+      .catch(() => setError('Failed to load captions. Please check the URL of the captions file.'))
       .finally(() => setLoading(false));
   }, [url]);
 

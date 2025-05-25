@@ -38,9 +38,7 @@ export function VideoPlayer({
         ref={videoRef}
         controls
         className="rounded-xl"
-        onError={() =>
-          setError('Failed to load video. Please check the URL or your network connection.')
-        }
+        onError={() => setError('Failed to load video. Please check the URL of the video file.')}
       />
 
       {captionsEnabled && activeCaption && (
