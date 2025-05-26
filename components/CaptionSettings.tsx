@@ -18,9 +18,6 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
       {...rest}
     >
       <div className="flex items-center col-span-3 gap-2">
-        <label htmlFor="captions-toggle" className="text-lg font-semibold text-gray-800">
-          Captions (c)
-        </label>
         <input
           id="captions-toggle"
           type="checkbox"
@@ -28,6 +25,9 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
           onChange={() => store.setCaptionsEnabled(!store.captionsEnabled)}
           className="h-4 w-4"
         />
+        <label htmlFor="captions-toggle" className="text-lg font-semibold text-gray-800">
+          Captions (c)
+        </label>
       </div>
 
       <button
