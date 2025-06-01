@@ -1,11 +1,11 @@
 import { captionStyleDefaults, useCaptionStylesStore } from '../stores/use-caption-styles-store.ts';
-import type { HTMLProps } from 'react';
+import { type HTMLProps, memo } from 'react';
 import { cn } from '../util/cn.ts';
 import { CAPTION_POSITION, isCaptionPosition } from '../constants/caption-position.ts';
 import { useHotkey } from '../hooks/use-hotkey.ts';
 import { FONT_FAMILY, isFontFamily } from '../constants/font-family.ts';
 
-export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement>) {
+function CaptionSettingsComponent({ className, ...rest }: HTMLProps<HTMLDivElement>) {
   const store = useCaptionStylesStore();
 
   useHotkey('c', () => {
@@ -116,3 +116,5 @@ export function CaptionSettings({ className, ...rest }: HTMLProps<HTMLDivElement
     </section>
   );
 }
+
+export const CaptionSettings = memo(CaptionSettingsComponent);

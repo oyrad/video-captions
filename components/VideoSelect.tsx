@@ -1,13 +1,13 @@
 import { videoData } from '../data/video-data';
 import { cn } from '../util/cn.ts';
-import type { HTMLProps } from 'react';
+import { type HTMLProps, memo } from 'react';
 
 interface VideoSelectProps extends HTMLProps<HTMLDivElement> {
   selectedIndex: number;
   onVideoChange: (index: number) => void;
 }
 
-export function VideoSelect({
+function VideoSelectComponent({
   selectedIndex,
   onVideoChange,
   className,
@@ -35,3 +35,5 @@ export function VideoSelect({
     </section>
   );
 }
+
+export const VideoSelect = memo(VideoSelectComponent);

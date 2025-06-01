@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { VideoPlayer } from '../components/VideoPlayer.tsx';
 import { useCaptions } from '../hooks/use-captions.ts';
 import { Transcript } from '../components/Transcript.tsx';
@@ -34,6 +34,10 @@ export default function App() {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
+  const handleVideoChange = useCallback((index: number) => {
+    setVideo(videoData[index]);
+  }, []);
+
   return (
     <main className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 w-screen h-screen bg-neutral-900">
       <div className="flex flex-col gap-4 lg:col-span-2">
@@ -42,10 +46,7 @@ export default function App() {
         <div className="flex flex-col-reverse lg:flex-row gap-4">
           <CaptionSettings className="flex-1" />
 
-          <VideoSelect
-            selectedIndex={videoData.indexOf(video)}
-            onVideoChange={(index) => setVideo(videoData[index])}
-          />
+          <VideoSelect selectedIndex={videoData.indexOf(video)} onVideoChange={handleVideoChange} />
         </div>
       </div>
 
